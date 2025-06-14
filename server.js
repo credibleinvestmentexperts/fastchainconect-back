@@ -10,7 +10,7 @@ const app = express();
 // ✅ Fix CORS origin syn
 const allowedOrigins = [
   "https://fastchainconnect.com/",
-  "https://api.fastchainconnect.com/",
+  "https://back.fastchainconnect.com/",
   "https://fastchainconect-back.vercel.app/",
   "http://localhost:5173",
 ];
