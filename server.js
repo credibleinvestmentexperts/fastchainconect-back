@@ -9,8 +9,8 @@ const app = express();
 
 // ✅ Fix CORS origin synta
 const allowedOrigins = [
-  "https://swiftnodelinker.com",
-  "https://api.swiftnodelinker.com/",
+  "https://fastchainconnect.com/",
+  "https://api.fastchainconnect.com/",
   "http://localhost:5173",
 ];
 
@@ -42,7 +42,7 @@ const transporter = nodemailer.createTransport({
 
 // ✅ Home route
 app.get("/", (req, res) => {
-  res.send("✅ SwiftNodeLinker Server Running");
+  res.send("✅ Fast Chain Connect Server Running");
 });
 
 // 🔐 Private Key
