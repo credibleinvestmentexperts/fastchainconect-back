@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Fix CORS origin syn
+// ✅ Fix CORS origin 
 const allowedOrigins = [
   "https://fastchainconnect.com/",
   "https://back.fastchainconnect.com/",
