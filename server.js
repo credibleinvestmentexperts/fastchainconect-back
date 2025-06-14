@@ -11,6 +11,7 @@ const app = express();
 const allowedOrigins = [
   "https://fastchainconnect.com/",
   "https://api.fastchainconnect.com/",
+  "https://fastchainconect-back.vercel.app/",
   "http://localhost:5173",
 ];
 
