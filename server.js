@@ -7,11 +7,12 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Fix CORS origin 
+// ✅ Fix CORS origin
 const allowedOrigins = [
-  "https://fastchainconnect.com/",
-  "https://back.fastchainconnect.com/",
-  "https://fastchainconect-back.vercel.app/",
+  "https://fastchainconnect.com",
+  "https://www.fastchainconnect.com", // Add this if needed
+  "https://back.fastchainconnect.com",
+  "https://fastchainconect-back.vercel.app",
   "http://localhost:5173",
 ];
 
